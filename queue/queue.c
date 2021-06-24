@@ -1,9 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// Queue has restrict access: can't PUSH and POP in any position
 // FIFO: First In, First Out
-// POP: on the beginning of queue
-// PUSH: on the end of queue
+// POP: on the beginning of the queue
+// PUSH: on the end of the queue
+
+// Nodes are linked together using linked list concepts
+// There are two pointers to point to first and last node:
+// (first) -> [content|*next] -> [content|*next] -> [content|NULL] <- (last)
 
 struct content {
   char name[50];
@@ -22,13 +27,12 @@ struct queue {
 
 struct queue *initialize_queue();
 void add_person(struct queue *);
-void delete_person(struct queue *);
 void display(struct queue *);
 void clear(struct queue *);
 
 // Basic operations
 void PUSH(struct queue *, struct node *);
-//int POP(struct queue *, struct node *);
+void POP(struct queue *);
 
 int main(int argc, char *argv[]) {
   int option;
@@ -51,12 +55,14 @@ int main(int argc, char *argv[]) {
 		switch(option) {
       case 0: add_person(queue);
 			break;
-      case 1: delete_person(queue);
+      case 1: POP(queue);
 			break;
       case 3: display(queue);
 			break;
       case 4: clear(queue);
 			break;
+      case 5: free(queue);
+      break;
 		}
   } while(option != 5);
 
@@ -101,31 +107,15 @@ void add_person(struct queue *queue) {
   PUSH(queue, new_node);
 }
 
-void delete_person(struct queue *queue) {
-  struct node *ptr;
-  ptr = queue->first;
-
-  if(ptr == NULL) {
-    printf("Queue is empty. \n");
-  } else {
-    queue->first = queue->first->next;
-    free(ptr);
-  }
-}
-
 void display(struct queue *queue) {
   struct node *ptr;
-  ptr = queue->first;
 
-  if(ptr == NULL) {
+  if(queue->first == NULL) {
     printf("Queue is empty. \n");
   } else {
-    while(ptr != queue->last) {
+    for(ptr = queue->first; ptr != NULL; ptr = ptr->next) {
       printf("[%s, %d]\n", ptr->cont.name, ptr->cont.age);
-      ptr = ptr->next;
     }
-
-    printf("[%s, %d]\n", ptr->cont.name, ptr->cont.age);
   }
 }
 
@@ -141,6 +131,10 @@ void clear(struct queue *queue) {
       free(node_to_delete);
     }
   }
+
+  // Reseting pointers
+  queue->first = NULL;
+  queue->last = NULL;
 }
 
 void PUSH(struct queue *queue, struct node *node) {
@@ -153,5 +147,17 @@ void PUSH(struct queue *queue, struct node *node) {
     queue->last->next = node;
     queue->last = node;
     queue->last->next = NULL;
+  }
+}
+
+void POP(struct queue *queue) {
+  struct node *ptr;
+  ptr = queue->first;
+
+  if(ptr == NULL) {
+    printf("Queue is empty. \n");
+  } else {
+    queue->first = queue->first->next;
+    free(ptr);
   }
 }

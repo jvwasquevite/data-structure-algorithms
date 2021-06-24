@@ -4,6 +4,7 @@
 
 // Linked list is a linear collection of nodes, used on stacks, queues, etc.
 // Linked list is a self-referential data type
+
 // Linked list has irrestrict access: can PUSH and POP in any position
 
 // Nodes doesn't need to be on consecutive memory locations as arrays
@@ -69,6 +70,8 @@ int main(int argc, char *argv[]) {
 			break;
       case 4: clear(header);
 			break;
+      case 5: free(header);
+      break;
 		}
   } while(option != 5);
 
