@@ -26,7 +26,6 @@ struct stack {
 };
 
 struct stack *initialize_stack();
-struct stack *stack;
 
 void add_person(struct stack *);
 void delete_person(struct stack *);
@@ -47,7 +46,7 @@ int main(int argc, char *argv[]) {
   printf("5: Exit\n");
 
   // Initialize stack
-  stack = initialize_stack();
+  struct stack *stack = initialize_stack();
 
   do {
     printf("\nEnter your option: ");
@@ -123,16 +122,16 @@ void delete_person(struct stack *stack) {
 }
 
 void display(struct stack *stack) {
-  int top_index = stack->limit;
-
+  struct node *ptr;
+  
   if(stack->nodes == NULL) {
     printf("Stack empty!\n");
   } else {
-    printf("Top: %s \nBottom: %s \nLimit: %d \n\n", stack->top->name, stack->bottom->name, stack->limit);
-
-    for(int i=top_index; i>=0; i--) {
-      printf("%d: [%s, %d]\n", i, stack->nodes[i].name, stack->nodes[i].age);
+    for(ptr = stack->top; ptr != stack->bottom; ptr--) {
+      printf("[%s, %d]\n", ptr->name, ptr->age);
     }
+
+    printf("[%s, %d]\n", ptr->name, ptr->age); // Bottom node
   }
 }
 
@@ -164,7 +163,7 @@ void PUSH(struct stack *stack, struct node *node) {
 
     free(node);
   } else {
-    size_t size = sizeof(node)*(stack->limit + 1);
+    size_t size = sizeof(struct node)*(2*(sizeof(struct node)));
 
     // Reallocating memory for a new node on the stack
     stack->nodes = (struct node*)realloc(stack->nodes, size);
