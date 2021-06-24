@@ -2,6 +2,18 @@
 #include <stdlib.h>
 #include <string.h>
 
+// Linked list is a linear collection of nodes, used on stacks, queues, etc.
+// Linked list is a self-referential data type
+// Linked list has irrestrict access: can PUSH and POP in any position
+
+// Nodes doesn't need to be on consecutive memory locations as arrays
+// Nodes in a linked list can be accessed only in a sequential manner
+// Singly linked listed allow to access the nodes in only one way
+// Doubly linked listed allow to access the nodes in two ways
+
+// Header points to the first element and can store others information:
+// [header] -> [content|*next] -> [content|*next] -> [content|NULL]
+
 struct content {
   char name[50];
   int age;
@@ -23,7 +35,7 @@ void delete_person_by_name(struct header *);
 void display(struct header *);
 void clear(struct header *);
 
-// Basic operations
+// Basic operations with index insertion
 void PUSH(struct header *, struct node *, unsigned int);
 int POP(struct header *, unsigned int);
 
