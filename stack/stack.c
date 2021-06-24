@@ -2,7 +2,16 @@
 #include <stdlib.h>
 #include <string.h>
 
+// Stack has restrict access: can't PUSH and POP in any position
 // LIFO: last in, first out
+// POP: on the top of the stack
+// PUSH: on the top of the stack
+
+// Nodes are not linked together: has no next pointer
+// Nodes is allocated in consecutive memory locations as arrays
+// Nodes can be manipulated as arrays: node[índex]
+// There are two pointers to point to top and bottom node + limit integer:
+// (bottom) -> [node] -> [node] -> [node] <- (top) with limit = 2
 
 struct node {
   char name[50];
@@ -17,6 +26,8 @@ struct stack {
 };
 
 struct stack *initialize_stack();
+struct stack *stack;
+
 void add_person(struct stack *);
 void delete_person(struct stack *);
 void display(struct stack *);
@@ -36,7 +47,7 @@ int main(int argc, char *argv[]) {
   printf("5: Exit\n");
 
   // Initialize stack
-  struct stack *stack = initialize_stack();
+  stack = initialize_stack();
 
   do {
     printf("\nEnter your option: ");
@@ -53,6 +64,8 @@ int main(int argc, char *argv[]) {
 			break;
       case 4: clear(stack);
 			break;
+      case 5: free(stack);
+      break;
 		}
   } while(option != 5);
 
@@ -103,31 +116,31 @@ void delete_person(struct stack *stack) {
   struct node *node_to_delete;
   node_to_delete = &stack->nodes[stack->limit];
   
+  // Pass the toppest node to delete
   if(!POP(stack, node_to_delete)) {
     printf("Error: there is not top to delete.");
   }
 }
 
 void display(struct stack *stack) {
-  int top = stack->limit;
+  int top_index = stack->limit;
 
   if(stack->nodes == NULL) {
     printf("Stack empty!\n");
   } else {
     printf("Top: %s \nBottom: %s \nLimit: %d \n\n", stack->top->name, stack->bottom->name, stack->limit);
 
-    for(int i=top; i>=0; i--) {
+    for(int i=top_index; i>=0; i--) {
       printf("%d: [%s, %d]\n", i, stack->nodes[i].name, stack->nodes[i].age);
     }
   }
 }
 
 void clear(struct stack *stack) {
-  int top = stack->limit;
+  free(stack);
 
-  for(int i=top; i>=0; i--) {
-    free(&stack->nodes[i]);
-  }
+  // Reset stack
+  stack = initialize_stack();
 }
 
 void PUSH(struct stack *stack, struct node *node) {
@@ -179,6 +192,10 @@ int POP(struct stack *stack, struct node *node) {
   } else {
     stack->limit--;
     stack->top = &stack->nodes[stack->limit];
+
+    if (node == stack->bottom) {
+      stack->nodes = NULL;
+    }
     return 1;
   }
 }

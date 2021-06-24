@@ -8,4 +8,4 @@ test:
 	gcc stack.c -Wall -o stack; ./stack < input.txt
 
 valgrind:
-	gcc valgrind.c -Wall -o valgrind; valgrind --leak-check=full --track-origins=yes -s  ./valgrind < input.txt
+	gcc stack.c -Wall -o stack; valgrind --leak-check=full --track-origins=yes -s  ./stack < input.txt
