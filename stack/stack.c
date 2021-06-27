@@ -144,7 +144,7 @@ void clear(struct stack *stack) {
 
 void PUSH(struct stack *stack, struct node *node) {
   if(stack->nodes==NULL) {
-    // Allocating memory for a new node on the stack
+    // Allocating memory for the first node on the stack
     stack->nodes = (struct node*)malloc((sizeof(struct node)));
 
     if(!stack->nodes){
@@ -161,25 +161,27 @@ void PUSH(struct stack *stack, struct node *node) {
     stack->bottom = &stack->nodes[0];
     stack->limit++;
 
+    printf("Tamanho: %zu \n", sizeof(stack->nodes));
+
     free(node);
   } else {
-    size_t size = sizeof(struct node)*(2*(sizeof(struct node)));
-
     // Reallocating memory for a new node on the stack
-    stack->nodes = (struct node*)realloc(stack->nodes, size);
+    stack->nodes = (struct node*)realloc(stack->nodes, 3 * sizeof(struct node)*2);
 
     if(!stack->nodes){
       printf("Memory allocation error.\n");
       exit(1);
     }
 
-    // Updating stack informations
-    stack->limit++;
-    stack->top = &stack->nodes[stack->limit];
-
     // Copying new_node to stack
     strcpy(stack->nodes[stack->limit].name, node->name);
     stack->nodes[stack->limit].age = node->age;
+
+    // Updating stack informations
+    stack->limit++;
+    stack->top = &stack->nodes[stack->limit];
+    
+    printf("Tamanho: %zu \n", sizeof(stack->nodes));
 
     free(node);
   }
