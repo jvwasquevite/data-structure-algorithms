@@ -23,6 +23,7 @@ struct stack {
   struct node *top;
   struct node *bottom;
   int limit;
+  int size;
 };
 
 struct stack *initialize_stack();
@@ -87,6 +88,7 @@ struct stack *initialize_stack() {
   stack->top = NULL;
   stack->bottom =  NULL;
   stack->limit = -1;
+  stack->size = 2;
 
   return stack;
 }
@@ -122,27 +124,41 @@ void delete_person(struct stack *stack) {
 }
 
 void display(struct stack *stack) {
-  struct node *ptr;
-  
+  int top = stack->limit;
+
   if(stack->nodes == NULL) {
     printf("Stack empty!\n");
   } else {
-    for(ptr = stack->top; ptr != stack->bottom; ptr--) {
-      printf("[%s, %d]\n", ptr->name, ptr->age);
-    }
+    //printf("Top: %s \nBottom: %s \nLimit: %d \n\n", stack->top->name, stack->bottom->name, stack->limit);
 
-    printf("[%s, %d]\n", ptr->name, ptr->age); // Bottom node
+    for(int i=top; i>=0; i--) {
+      printf("%d: [%s, %d]\n", i, stack->nodes[i].name, stack->nodes[i].age);
+    }
   }
 }
 
 void clear(struct stack *stack) {
-  free(stack);
+  struct node *node_to_delete;
+  int top = stack->limit;
 
-  // Reset stack
-  stack = initialize_stack();
+  for(int i=top; i>=0; i--) {
+    node_to_delete = &stack->nodes[i];
+
+    printf("Deleta o %s", node_to_delete->name);
+
+    if(!POP(stack, node_to_delete)) {
+      printf("Error: there is not top to delete.");
+    }
+  }
+
+  stack->nodes = NULL;
+  stack->top = NULL;
+  stack->bottom = NULL;
 }
 
 void PUSH(struct stack *stack, struct node *node) {
+  struct node *temp;
+  
   if(stack->nodes==NULL) {
     // Allocating memory for the first node on the stack
     stack->nodes = (struct node*)malloc((sizeof(struct node)));
@@ -161,30 +177,30 @@ void PUSH(struct stack *stack, struct node *node) {
     stack->bottom = &stack->nodes[0];
     stack->limit++;
 
-    printf("Tamanho: %zu \n", sizeof(stack->nodes));
-
-    free(node);
   } else {
     // Reallocating memory for a new node on the stack
-    stack->nodes = (struct node*)realloc(stack->nodes, 3 * sizeof(struct node)*2);
+    temp = (struct node*)realloc(stack->nodes, sizeof(struct node) * stack->size);
+    printf("Size: %d \n", stack->size);
 
-    if(!stack->nodes){
+    if(!temp){
       printf("Memory allocation error.\n");
       exit(1);
     }
+
+    stack->nodes = temp;
+
+    // Updating stack informations
+    stack->limit++;
+    stack->top = &stack->nodes[stack->limit];
 
     // Copying new_node to stack
     strcpy(stack->nodes[stack->limit].name, node->name);
     stack->nodes[stack->limit].age = node->age;
 
-    // Updating stack informations
-    stack->limit++;
-    stack->top = &stack->nodes[stack->limit];
-    
-    printf("Tamanho: %zu \n", sizeof(stack->nodes));
-
-    free(node);
+    stack->size++;
   }
+
+  free(node);
 }
 
 int POP(struct stack *stack, struct node *node) {
