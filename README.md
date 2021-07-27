@@ -9,7 +9,7 @@
   <p align="center">
     Simple data structure algorithms developed with C
     <br />
-    <a href="https://jvdwasquevite.notion.site/Algoritmos-e-Estruturas-de-Dados-I-445c7e7de17b4786bf0fede95f75e881"><strong>Explore documentation »</strong></a>
+    <a href="https://jvwasquevite.notion.site/Algoritmos-e-Estruturas-de-Dados-I-445c7e7de17b4786bf0fede95f75e881"><strong>Explore documentation »</strong></a>
     <br />
     <br />
     <a href="https://github.com/jvwasquevite/data-structure-algorithms /issues">Report Bug</a>
