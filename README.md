@@ -1,6 +1,6 @@
 <br />
 <p align="center">
-  <a href="https://github.com/jvwasquevite/data-structure-algorithms ">
+  <a href="https://github.com/jvwasquevite/data-structure-algorithms">
     <img src="https://jvwasquevite.com/github/logo.png" alt="Logo">
   </a>
 
@@ -12,9 +12,9 @@
     <a href="https://jvwasquevite.notion.site/Algoritmos-e-Estruturas-de-Dados-I-445c7e7de17b4786bf0fede95f75e881"><strong>Explore documentation »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/jvwasquevite/data-structure-algorithms /issues">Report Bug</a>
+    <a href="https://github.com/jvwasquevite/data-structure-algorithms/issues">Report Bug</a>
     ·
-    <a href="https://github.com/jvwasquevite/data-structure-algorithms /issues">Request Feature</a>
+    <a href="https://github.com/jvwasquevite/data-structure-algorithms/issues">Request Feature</a>
     ·
     <a href="https://github.com/jvwasquevite?tab=repositories">More Projects</a>
   </p>
@@ -49,7 +49,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 1. Clone this repository:
    ```sh
-   git clone https://github.com/jvwasquevite/data-structure-algorithms .git
+   git clone https://github.com/jvwasquevite/data-structure-algorithms.git
    ```
   
 ### Useful commands
