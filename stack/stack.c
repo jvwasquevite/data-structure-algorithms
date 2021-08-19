@@ -129,8 +129,6 @@ void display(struct stack *stack) {
   if(stack->nodes == NULL) {
     printf("Stack empty!\n");
   } else {
-    //printf("Top: %s \nBottom: %s \nLimit: %d \n\n", stack->top->name, stack->bottom->name, stack->limit);
-
     for(int i=top; i>=0; i--) {
       printf("%d: [%s, %d]\n", i, stack->nodes[i].name, stack->nodes[i].age);
     }
