@@ -1,6 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/*
+ * Graph implementation using adjacency list
+*/
+
 struct node {
   char vertex;
   struct node *next;
@@ -12,7 +16,7 @@ void displayGraph(struct node *Adj[], int no_of_nodes);
 void deleteGraph (struct node *Adj[], int no_of_nodes);
 
 int main() {
-  struct node *Adj[10];
+  struct node *Adj[20];
   int i, no_of_nodes;
 
   printf("How many nodes has the graph: ");
@@ -23,7 +27,7 @@ int main() {
   }
 
   createGraph(Adj, no_of_nodes);
-  printf("The graph is: ");
+  printf("The graph is:\n");
   displayGraph(Adj, no_of_nodes);
   //deleteGraph(Adj, no_of_nodes);
 
@@ -70,9 +74,10 @@ void displayGraph(struct node *Adj[], int no_of_nodes) {
 
     printf("The neighbours of node %d are:", i);
     while(ptr != NULL) {	
-      printf("\t%d", ptr -> vertex);	
+      printf(" %d", ptr -> vertex);	
       ptr = ptr -> next;
     }
+    printf("\n");
   }
 }
 
