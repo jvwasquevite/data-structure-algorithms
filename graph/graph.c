@@ -2,7 +2,9 @@
 #include <stdlib.h>
 
 /*
- * Graph implementation using adjacency list
+ * Graph with weight implementation using adjacency list
+ * Maximum 20 nodes with weight reading
+ * Show stored data
 */
 
 struct node {
@@ -21,14 +23,17 @@ int main() {
   int i, no_of_nodes;
 
   printf("How many nodes has the graph: ");
-  scanf("%d", &no_of_nodes);
+  do {
+    scanf("%d", &no_of_nodes);
+    getchar();
+  } while (no_of_nodes < 1 || no_of_nodes > 20);
 
   for(i = 0; i < no_of_nodes; i++) {
     Adj[i] = NULL;
   }
 
   createGraph(Adj, no_of_nodes);
-  printf("The graph is:\n");
+  printf("\nThe graph is:\n");
   displayGraph(Adj, no_of_nodes);
   deleteGraph(Adj, no_of_nodes);
 
