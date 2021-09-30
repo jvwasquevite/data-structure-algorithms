@@ -1,5 +1,5 @@
-<h3 align="center">Graph implementation using C</h3>
-<p align="center">Graph implementation using adjacency matrix</p>
+# Graph algorithm
+Graph implementation with adjacency matrix representation using C.
 
 ## Weighted graph used on tests
 
