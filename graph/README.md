@@ -1,12 +1,20 @@
-# Graph implementation using matrix
+<br />
+<h3 align="center">Graph implementation using C</h3>
+<p align="center">Graph implementation using adjacency matrix</p>
 
-## Graph used on tests
+## Weighted graph used on tests
 
 ![Graph](input_graph.png)
 
-## Adjacency matrix
+This graph example was used for testing purposes, with inputs stored on `input.txt`.
 
-Adjacency matrix of an non-oriented graph
+```sh
+# To run this test, use the below command:
+make test
+```
+
+### Adjacency matrix representation
+Non-oriented weighted adjacency matrix representation of the above graph.
 
 | 0   | 1   | 2   | 3   | 4   |
 | --- | --- | --- | --- | --- |
@@ -16,12 +24,14 @@ Adjacency matrix of an non-oriented graph
 | 30  | 0   | 20  | 0   | 60  |
 | 100 | 0   | 10  | 60  | 0   |
 
-## Minimum Spanning Tree (MST)
+### Minimum spanning tree (MST)
 
-Implemented on Kruskal's algorithm
+Data results implemented on Kruskal's algorithm.
 
-(0,1) = 10 + (2,4) = 10 + (2,3) = 20 + (0,3) = 30
-
-**Path**: 4 -(10)-> 2 -(20)-> 3 -(30)-> 0 -(10)-> 1
+**Edges path**:
+1. Edges (4, 2) with weight = 10
+2. Edges (2, 3) with weight = 20
+3. Edges (3, 0) with weight = 30
+4. Edges (0, 1) with weight = 10
 
 **Minimum cost**: 70
