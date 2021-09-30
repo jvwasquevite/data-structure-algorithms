@@ -1,4 +1,3 @@
-<br />
 <h3 align="center">Graph implementation using C</h3>
 <p align="center">Graph implementation using adjacency matrix</p>
 
